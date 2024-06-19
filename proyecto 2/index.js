@@ -1,6 +1,4 @@
-const filterBtn = document.createElement('button')
-filterBtn.id = 'filtrar'
-filterBtn.textContent = 'filtrar'
+
 
 const camaras = [
   {
