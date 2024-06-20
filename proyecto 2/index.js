@@ -1,4 +1,6 @@
-
+const filterBtn = document.createElement('button')
+filterBtn.id = 'filtrar'
+filterBtn.textContent = 'filtrar'
 
 const camaras = [
   {
@@ -51,7 +53,7 @@ const camaras = [
     name: 'EOS 4000D',
     price: 449.99,
     img: './assets/eos 4000d.png',
-    model: 'Reflex Digitales',
+    model: 'Reflex digitales',
     description:
       'Disfruta de fotos creativas de calidad réflex y vídeos Full HD con esta sencilla e intuitiva EOS de 18 megapíxeles.'
   },
@@ -60,7 +62,7 @@ const camaras = [
     name: 'EOS-1D X Mark III',
     price: 5999.99,
     img: './assets/eos1d.png',
-    model: 'Reflex Digitales',
+    model: 'Reflex digitales',
     description:
       'La vida está repleta de momentos irrepetibles. Conserva muchos más con la EOS-1D X Mark III y comparte tu historia visual con el resto del mundo.'
   },
@@ -78,7 +80,7 @@ const camaras = [
     name: 'PowerShot ZOOM',
     price: 315.99,
     img: './assets/powershot.png',
-    model: 'Cámaras Compactas',
+    model: 'Cámaras compactas',
     description:
       'Una PowerShot de bolsillo para capturar esos mágicos momentos en familia o de naturaleza a 100 o 400 mm1, o a 800 mm con el multiplicador digital.'
   },
@@ -87,7 +89,7 @@ const camaras = [
     name: 'Zoemini S2',
     price: 129.99,
     img: './assets/zoemini.png',
-    model: 'Cámaras Instantáneas',
+    model: 'Cámaras instantáneas',
     description:
       'Haz fotos e imprímelas desde un solo dispositivo. Una cámara de 8 MP, tecnología Zink™ y poder guardar fotos en una tarjeta Micro SD: el combo perfecto para las fotos improvisadas.'
   },
@@ -105,7 +107,7 @@ const camaras = [
     name: 'PowerShot V10',
     price: 444.99,
     img: './assets/v10.png',
-    model: 'Cámaras Vloggin',
+    model: 'Cámara Vloggin',
     description:
       'Destaca online y mantén la discreción mientras grabas con la cámara para vlogging 4K, compacta y todo en uno de Canon.'
   },
@@ -114,7 +116,7 @@ const camaras = [
     name: 'G7 X Mark IIIg7',
     price: 89.99,
     img: './assets/g7.png',
-    model: 'Cámaras Vloggin',
+    model: 'Cámara Vloggin',
     description:
       'Una cámara conectada que captura excelentes vídeos y fotos que encantarán a tus seguidores.'
   },
@@ -123,7 +125,7 @@ const camaras = [
     name: 'EOS R8',
     price: 1499.99,
     img: './assets/r8.png',
-    model: 'Cámaras Vloggin',
+    model: 'Cámara Vloggin',
     description:
       'Da el salto a la fotografía y el vídeo Full Frame y haz realidad tus ambiciones creativas.'
   },
@@ -132,7 +134,7 @@ const camaras = [
     name: 'IXUS 285 HS',
     price: 334.99,
     img: './assets/ixus2.png',
-    model: 'Camaras Vloggin',
+    model: 'Cámara Vloggin',
     description: 'Rendimiento y estilo conectados'
   },
   {
@@ -183,28 +185,11 @@ const camaras = [
 ]
 
 let model = ''
-
 const models = []
 
-const filtrar = () => {
-  const filtered = []
-  for (const camara of camaras) {
-    if (model.includes(camara.model)) {
-      filtered.push(camara)
-    }
-  }
-  printProductos(filtered)
-}
-
 const createSelect = () => {
-  const sectionCamaras = document.querySelector('#filtros')
+  const sectionCamaras = document.getElementById('filters')
   const selectModel = document.createElement('select')
-  //!
-  const defaultOption = document.createElement('option')
-  defaultOption.textContent = 'Modelos'
-  defaultOption.selected = true
-  selectModel.appendChild(defaultOption)
-  //!
 
   for (const model of models) {
     const option = document.createElement('option')
@@ -221,6 +206,17 @@ const createSelect = () => {
     model = event.target.value
     filtrar()
   })
+}
+
+const filtrar = () => {
+  const filtered = []
+
+  for (const camara of camaras) {
+    if (model.includes(camara.model)) {
+      filtered.push(camara)
+    }
+  }
+  printProductos(filtered)
 }
 
 const fillModels = (camaras) => {
@@ -250,6 +246,10 @@ const printProductos = (productos) => {
     price.textContent = producto.price + ' €'
     description.textContent = producto.description
 
+    name.className = 'name'
+    description.className = 'description'
+    price.className = 'price'
+
     sectionCamara.append(artImg)
     artImg.append(img)
     sectionCamara.append(name)
@@ -258,6 +258,76 @@ const printProductos = (productos) => {
     sectionCamaras.append(sectionCamara)
   }
 }
+//!
+const searchInput = document.getElementById('searchInput')
 
+const handleSearch = () => {
+  const searchItem = searchInput.value.toLowerCase()
+  const filteredCamaras = camaras.filter((camara) =>
+    camara.name.toLowerCase().startsWith(searchItem)
+  )
+
+  resultList.innerHTML = ''
+  filteredCamaras.forEach((camara) => {
+    const filteredNames = []
+    if (searchInput.includes(camara.name)) {
+      filteredNames.push(camaras)
+    }
+    searchInput.append(filteredNames)
+  })
+
+  printProductos(filteredNames)
+}
+searchInput.addEventListener('input', handleSearch)
+
+//!
+document.addEventListener('DOMContentLoaded', () => {
+  const price = document.getElementById('filters')
+
+  const priceLabel = document.createElement('label')
+  priceLabel.setAttribute('for', 'price')
+  priceLabel.textContent = 'Precio Máximo:'
+  price.appendChild(priceLabel)
+
+  const priceInput = document.createElement('input')
+  priceInput.setAttribute('type', 'number')
+  priceInput.setAttribute('id', 'price')
+  priceInput.setAttribute('name', 'price')
+  price.appendChild(priceInput)
+
+  const filterButton = document.createElement('button')
+  filterButton.setAttribute('id', 'filterButton')
+  filterButton.textContent = 'Filtrar'
+  price.appendChild(filterButton)
+
+  const productList = document.createElement('ul')
+  productList.setAttribute('id', 'productList')
+  price.appendChild(productList)
+
+  function filterProducts() {
+    const maxPrice = parseFloat(priceInput.value) || Infinity
+
+    const filteredProducts = camaras.filter(
+      (product) => camara.price <= maxPrice
+    )
+
+    displayProducts(filteredProducts)
+  }
+
+  function displayProducts(products) {
+    productList.innerHTML = ''
+
+    camaras.forEach((camara) => {
+      const productItem = document.createElement('li')
+      productItem.textContent = `${camara.name} - $${camara.price}`
+      productList.appendChild(camaras)
+    })
+  }
+
+  filterButton.addEventListener('click', filterProducts)
+
+  displayProducts(filtered)
+})
+//!
 printProductos(camaras)
 createSelect()
