@@ -44,25 +44,24 @@ ul {
   list-style: none;
   display: flex;
   width: fit-content;
-  gap: 60px;
-  font-size: 17px;
-  font-weight: 600;
-  padding-top: var(--rtc-padding-s);
-  padding-right: var(--rtc-padding-xl);
+  gap: 40px;
+  margin-top: 10px;
 }
 
-a {
-  text-decoration: none;
-  color: var(--rtc-clear-text);
+a > img {
+  height: 40px;
+  align-items: center;
 }
 
 header {
   display: flex;
   justify-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 10px;
-  background-color: #052434b7;
+  background-color: #0524348b;
   width: 99svw;
+  flex-wrap: wrap;
+  padding: var(--rtc-padding-s);
 }
 header > div > input {
   margin-top: 15px;
@@ -127,46 +126,23 @@ section > article {
 
 article > div > img {
   height: 200px;
+  max-width: 220px;
 }
 #camaras {
   gap: 60px;
   padding: 30px;
   width: 99vw;
 }
-/* #productos {
-  margin-bottom: var(--rtc-margin-section);
-  gap: var(--rtc-gap-xl);
-  padding: 0px var(--rtc-padding-m);
-}
-
-#productos > div {
-  position: relative;
-  flex-direction: column;
-  width: 250px;
-  padding-bottom: var(--rtc-padding-m);
-  border: var(--rtc-primary-border);
-  border-radius: var(--rtc-br);
-} */
-
-/* .imgContainer {
-  margin-top: var(--rtc-margin-m);
-  width: 80%;
-  height: 500px;
-  border-radius: var(--rtc-br);
-}
-
-.imgContainer > img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-} */
 
 #filters {
   padding: var(--rtc-padding-m);
   display: flex;
   justify-content: center;
+  gap: var(--rtc-padding-s);
+  flex-wrap: wrap;
+  width: 99vw;
 }
-#filters > select {
+#filters > .input {
   height: 35px;
   padding: 5px;
   border-radius: 5px;
@@ -175,4 +151,30 @@ article > div > img {
   background-color: var(--rtc-color-2);
   color: var(--rtc-color-4);
   font-size: 17px;
+}
+
+.button {
+  width: 110px;
+  background-color: #052434a6;
+  border-radius: 10px;
+  color: var(--rtc-clear-text);
+  font-size: 16px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+footer {
+  width: 99vw;
+  height: 100px;
+  background-color: #0524348b;
+}
+
+@media (max-width: 600px) {
+  header,
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
